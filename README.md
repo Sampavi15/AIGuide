@@ -1,29 +1,32 @@
-# 🌏 WanderWise: AI-Powered Storytelling Adventure in Colombo
+# ✨ WanderWise: AI-Powered Storytelling Journey through Colombo 
 
-Welcome to **WanderWise** — your intelligent, narrative-driven travel companion for discovering the vibrant city of Colombo, Sri Lanka.  
-Let AI guide you through immersive tales, interactive challenges, and hidden local gems, all tailored to your unique travel style.
+> _“Let stories guide your footsteps. Let wonder lead the way.”_
+
+**WanderWise** is your immersive, AI-enhanced travel companion—turning your visit to **Colombo, Sri Lanka**, into a dynamic, story-rich adventure. From bustling markets to hidden beaches, WanderWise doesn’t just guide you—it **enchants you**.
 
 ---
 
-## ✨ Features at a Glance
+## 🌍 What is WanderWise?
 
-- **Persona-Based Storytelling**  
-  Select your persona — Foodie, Historian, Observer, or Adventurer — and WanderWise will craft immersive, short-form narratives that match your interests. Each story is designed to transport you to the heart of Colombo, highlighting unique moments, flavors, and discoveries that resonate with your chosen travel style.
+WanderWise transforms traditional travel guides into **interactive storytelling adventures**. With every location, you’ll:
 
-- **Conversational Q&A**  
-  Engage in natural, free-form dialogue with your AI guide. Ask about places, culture, history, or food, and receive answers that are not just informative, but woven with local color, anecdotes, and cultural insights—making every response a mini-adventure.
+- 🌟 **Hear its tale**
+- ❓ **Face memory challenges**
+- 🗝️ **Unlock local secrets**
+- 🧭 **Shape your journey with questions**
 
-- **Interactive Quizzes**  
-  After each narrative, challenge yourself with multiple-choice questions generated directly from the story. These quizzes reinforce your journey, test your attention to detail, and make learning about Colombo both fun and rewarding.
+Whether you're exploring from your laptop or on the ground in Colombo, WanderWise adapts to your curiosity and style.
 
-- **Unlockable Local Secrets**  
-  Demonstrate your curiosity and insight to unlock exclusive “Local’s Secrets.” These are authentic tips, hidden gems, and off-the-beaten-path recommendations, each tailored to your persona and topic—giving you an insider’s edge on your adventure.
+---
 
-- **Seamless User Experience**  
-  Enjoy a colorful, engaging command-line interface with clear prompts, helpful feedback, and a smooth flow from story to quiz to secret discovery.
+## ✨ Features At a Glance
 
-- **Flexible & Extensible Design**  
-  Built with modular, semantic prompts and LLM integration, WanderWise is easy to extend with new personas, destinations, or features—making it a robust foundation for future travel AI experiences.
+| 🧠 Feature | 💬 Description |
+|-----------|----------------|
+| **🗺️ Immersive Narratives** | Choose a travel theme and enjoy vivid, sensory-rich stories. |
+| **❓ Story-Driven Quizzes** | Answer questions based on each narrative to test memory and insight. |
+| **🕵️ Unlock Hidden Gems** | Earn clues to offbeat spots through story interaction. |
+| **💬 Conversational AI** | Ask anything—get lore-rich, imaginative responses powered by LLMs. |
 
 ---
 
@@ -31,61 +34,55 @@ Let AI guide you through immersive tales, interactive challenges, and hidden loc
 
 ### Prerequisites
 
-- Python 3.8 or higher  
+- Python 3.12 or higher  
 - [mtllm](https://pypi.org/project/mtllm/) library  
 - A valid API key for your chosen LLM (e.g., Gemini)
 
 ### Installation
 
-1. **Clone the repository**
-   ```bash
-   git clone <your-repo-url>
+1. *Clone the repository*
+   bash
+   git clone <https://github.com/Sampavi15/AIGuide.git>
    cd AIGuide
-   ```
+   
 
-2. **Install dependencies**
-   ```bash
+2. *Install dependencies*
+   bash
    pip install -r requirements.txt
-   ```
+   
 
-3. **Set your API key**
-   ```bash
+3. *Set your API key*
+   bash
    export GEMINI_API_KEY=your_api_key_here
-   ```
+   
    Or on Windows:
-   ```cmd
+   cmd
    set GEMINI_API_KEY=your_api_key_here
-   ```
-
+   
 ### Start Your Journey
 
-```bash
+bash
 python wanderwise.jac
-```
+
 
 Follow the prompts to select your persona, explore topics, ask questions, and unlock the magic of Colombo!
 
 ---
 
-## 🗂️ Project Structure
+## 🗂 Project Structure
 
-- `wanderwise.jac` — Main application logic (Jac code, LLM integration, user interaction)
-- `requirements.txt` — Python dependencies
-- `screenshots/` — Example screenshots of the application
+- wanderwise.jac — Main application logic (Jac code, LLM integration, user interaction)
+- requirements.txt — Python dependencies
+- screenshots/ — Example screenshots of the application
 
 ---
 
 ## 📸 Screenshots
 
-Experience WanderWise in action:
+The `screenshots/` folder contains **step-by-step visuals** of the WanderWise experience
 
-![Screenshot 1](screenshots/image1.jpg)
-![Screenshot 2](screenshots/image2.jpg)
-![Screenshot 3](screenshots/image3.jpg)
-![Screenshot 4](screenshots/image4.jpg)
-![Screenshot 5](screenshots/image5.jpg)
-![Screenshot 6](screenshots/image6.jpg)
-![Screenshot 7](screenshots/image7.jpg)
+![alt text](image.png)
+![alt text](image-1.png)
 
 ---
 
@@ -97,4 +94,4 @@ For educational and demonstration purposes only.
 
 > *Let every story spark wonder,  
 > every quiz unlock a secret,  
-> and every journey with WanderWise become a cherished memory.*
+> and every journey with WanderWise become a cherished memory.*
