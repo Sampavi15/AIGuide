@@ -1,9 +1,11 @@
-import google.generativeai as genai;
+import from mtllm.llm { Model }
 import os;
 import json;
 import textwrap;
 
-
+# Initialize a global LLM instance.
+# Ensure your API key (e.g., GEMINI_API_KEY) is set in your environment.
+glob llm = Model(model_name="gemini/gemini-2.0-flash");
 
 class colors {
     with entry {
@@ -18,7 +20,6 @@ class colors {
         END = '\x1b[0m';
     }
 }
-
 
 """Prints text with specified color and style."""
 def cprint(
@@ -37,85 +38,54 @@ def cprint(
     print(f"{style}{color}{text}{colors.END}");
 }
 
+# 1. Define functions to generate content using the LLM.
 
-with entry {
-    try {
-        api_key = os.environ.get('GOOGLE_API_KEY');
-        genai.configure(api_key=api_key);
-        model = genai.GenerativeModel('models/gemini-2.0-flash');
+# Generates the main narrative for a topic based on the user's persona.
+def generate_narrative(topic: str, persona: str, destination: str = "Colombo") -> str by llm();
 
-        if
-        not api_key
+# Answers a user's specific, free-form question.
+def generate_free_response(question: str, topic: str, persona: str, context: str, destination: str = "Colombo") -> str by llm();
+
+# Generates a quiz based on a narrative.
+def generate_quiz(narrative: str) -> str by llm();
+
+
+# Generates a 'Local's Secret' as a reward.
+def generate_secret(topic: str, persona: str) -> str by llm();
+
+
+# --- Semantic Prompts for each 'def' function ---
+
+sem generate_narrative = """
+    You are 'WanderWise', a Sri Lankan storyteller. For a '{persona}', weave a short, enchanting tale (below 120 words) about the '{topic}' of '{destination}'.
+    Focus on a key moment, taste, or discovery to make them feel like they're there.
+    Don't just inform, captivate. End with an intriguing question to draw them in.
+    """;
+
+sem generate_free_response = """
+    You are WanderWise, the storyteller. A '{persona}' listener asks about '{topic}': '{question}'
+    Answer in a brief, narrative style. Instead of a dry fact, share a small piece of lore or a vivid detail, as if telling a secret. Keep it warm and concise.
+    """;
+
+sem generate_quiz = """
+    Based on the following travel narrative, generate a list of 2 multiple-choice questions in a valid JSON format solely based on this narrative.
+    Each question must:
+    - be strictly and directly answerable from the test provided above and do not use any general knowledge or information outside of the text
+    - Include 4 options labeled from a to d
+    - Indicate the correct answer letter ('a', 'b', 'c', or 'd')
+    -Include a fun, helpful hint
+
+    🎯 Keep the output in this JSON structure:
+    [
         {
-        raise ValueError(
-            'API key not found. Please set the GOOGLE_API_KEY environment variable.'
-        ) ;
-        } } except Exception as e {
-        cprint(
-            f"'Fatal Error: Could not configure AI model. '{e}",
-            color=colors.RED,
-            bold=True
-        );
-        model = None;
-    }
-}
+            "question": "...",
+            "options": {"a": "...", "b": "...", "c": "...", "d": "..."},
+            "answer": "...",
+            "hint": "..."
+        }
+    ]
+    """;
 
-
-"""Generates the main narrative for a topic based on the user's persona."""
-def generate_narrative(topic: Any, persona: Any, destination: Any = 'Colombo')-> str {
-    prompt =
-        f"\n    Generates the main narrative for a topic based on the user's persona.";
-    prompt =
-        f"\n    You are 'WanderWise', a Sri Lankan storyteller. For a '{persona}', weave a short, enchanting tale (below 120 words) about the '{topic}' of '{destination}'.\n    Focus on a key moment, taste, or discovery to make them feel like they're there.\n    Don't just inform, captivate. End with an intriguing question to draw them in.\n    ";
-    try {
-        response = model.generate_content(prompt);
-        return response.text;
-    } except Exception as e {
-        return f"I seem to have lost my train of thought... ('{e}')";
-    }
-}
-
-
-"""Answers a user's specific, free-form question."""
-def generate_free_response(
-    question: Any,
-    topic: Any,
-    persona: Any,
-    context: Any,
-    destination: Any = 'Colombo'
-)-> str {
-    prompt =
-        f"\n    You are WanderWise, the storyteller. A '{persona}' listener asks about '{topic}'\': '{question}'\n    Answer in a brief, narrative style. Instead of a dry fact, share a small piece of lore or a vivid detail, as if telling a secret. Keep it warm and concise.\n    ";
-    try {
-        response = model.generate_content(prompt);
-        return response.text;
-    } except Exception as e {
-        return f"That's a great question, but I'm drawing a blank right now. ('{e}')";
-    }
-}
-
-def generate_quiz(narrative: Any)-> list {
-    prompt =
-        f"\n    \nBased on the following travel narrative, generate a list of 2 multiple-choice questions in a valid JSON format solely based on this narrative.\nEach question must:\n- be strictly and directly answerable from the test provided above and do not use any general knowledge or information outside of the text\n- Include 4 options labeled from a to d\n- Indicate the correct answer letter ('a', 'b', 'c', or 'd')\n-Include a fun, helpful hint\n\n🎯 Keep the output in this JSON structure:\n[\n  ";
-        response = model.generate_content(prompt);
-        cleaned_response =
-            response.text.strip().replace('```json', '').replace('```', '');
-        return json.loads(cleaned_response);
-    
-}     
-
-
-"""Generates a 'Local's Secret' as a reward."""
-def generate_secret(topic: Any, persona: Any)-> str {
-    prompt =
-        f"\n    You are \'WanderWise\', an expert travel guide.\n    Generate one short, fascinating 'Local Secret' about the \'{topic}' of Colombo.\n    The secret should be a cool, non-obvious tip that a tourist would love.\n    Tailor it to the '{persona}' persona.\n    For a Foodie, a secret dish or place.\n    For a Historian, a hidden detail.\n    For an Observer, a cultural tip.\n    For an Adventurer, a tip about a hidden hike, a unique water sport, or a thrilling tuk-tuk route.\n    Start the secret with a 🗝️ emoji.\n    ";
-    try {
-        response = model.generate_content(prompt);
-        return response.text;
-    } except Exception {
-        return '🗝️ The best secret is to always keep exploring!';
-    }
-}
 
 
 """The main function to run the WanderWise Travel Guide."""
@@ -184,8 +154,24 @@ def main() {
             print(('\n' + textwrap.fill(answer, 80)));}
         cprint('\n📜 The Challenge Awaits! 📜', color=colors.HEADER, bold=True);
         cprint("Let's test your adventurer's memory.", bold=True);
-        quiz = generate_quiz(narrative);
-        for (i, q) in enumerate(quiz, 1) {
+        # Get quiz as string and parse it manually
+        quiz_json_string = generate_quiz(narrative);
+        try{         
+            if(quiz_json_string.startswith("```json") and quiz_json_string.endswith("```")){
+                quiz_json_string = quiz_json_string.lstrip("```json").rstrip("```");
+                quiz_json_string = quiz_json_string.strip();# Remove any leading/trailing whitespace/newlines
+                
+            }
+            quiz = json.loads(quiz_json_string);
+            }
+        except (json.JSONDecodeError)as e{
+            cprint(f"Error decoding quiz JSON: {e}", color=colors.RED);
+            cprint(f"Raw quiz output: {quiz_json_string}", color=colors.RED);
+            # If JSON decoding fails, we skip the quiz for this round and continue to the next topic
+            continue;} 
+        
+
+            for (i, q ) in enumerate(quiz, 1) {
             cprint(f"'\nQuestion '{i}': '{q[ 'question' ]}", bold=True);
             for (letter, text) in q['options'].items() {
                 print(f"{letter}) {text}");
