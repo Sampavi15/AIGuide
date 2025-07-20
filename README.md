@@ -6,6 +6,8 @@
 
 ---
 
+### 👥 Team: NeuroNex
+
 ## 🌍 What is WanderWise?
 
 WanderWise transforms traditional travel guides into **interactive storytelling adventures**. With every location, you’ll:
@@ -95,3 +97,5 @@ For educational and demonstration purposes only.
 > *Let every story spark wonder,  
 > every quiz unlock a secret,  
 > and every journey with WanderWise become a cherished memory.*
+
+
