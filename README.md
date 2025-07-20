@@ -8,19 +8,6 @@
 
 ### 👥 Team: NeuroNex
 
-## 🌍 What is WanderWise?
-
-WanderWise transforms traditional travel guides into **interactive storytelling adventures**. With every location, you’ll:
-
-- 🌟 **Hear its tale**
-- ❓ **Face memory challenges**
-- 🗝️ **Unlock local secrets**
-- 🧭 **Shape your journey with questions**
-
-Whether you're exploring from your laptop or on the ground in Colombo, WanderWise adapts to your curiosity and style.
-
----
-
 ## ✨ Features At a Glance
 
 | 🧠 Feature | 💬 Description |
@@ -43,27 +30,27 @@ Whether you're exploring from your laptop or on the ground in Colombo, WanderWis
 ### Installation
 
 1. *Clone the repository*
-   bash
+
    git clone <https://github.com/Sampavi15/AIGuide.git>
    cd AIGuide
    
 
 2. *Install dependencies*
-   bash
+   
    pip install -r requirements.txt
    
 
 3. *Set your API key*
-   bash
+   
    export GEMINI_API_KEY=your_api_key_here
    
    Or on Windows:
-   cmd
+   
    set GEMINI_API_KEY=your_api_key_here
    
 ### Start Your Journey
 
-bash
+
 python wanderwise.jac
 
 
